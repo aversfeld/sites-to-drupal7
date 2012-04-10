@@ -1,5 +1,4 @@
 #!/usr/local/bin/python
-
 ###Retrieves a single page from a Google Sites webpage
 ####
 
