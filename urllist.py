@@ -25,8 +25,8 @@ def parse_sitemap(url):
 
 args = sys.argv[1:]
 if len(args) != 2:
-  print "Usage: urlsitemap-url outputfile"
-  print "    example:  urllist http://sites.google.com/site/foobar/system/feeds/sitemap urls.txt"
+  print "Usage: urllist.py urlsitemap-url outputfile"
+  print "    example:  urllist.py http://sites.google.com/site/foobar/system/feeds/sitemap urls.txt"
   sys.exit()
 url = args[0]
 outfile = args[1]
