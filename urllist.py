@@ -33,6 +33,7 @@ outfile = args[1]
 ofile = open(outfile, 'w')
 urllist = parse_sitemap(url)
 print urllist
+print len(urllist)
 for line in urllist:
   url = line + '\n'
   ofile.write(url)

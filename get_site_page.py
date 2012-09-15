@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
-###Retrieves a single page from a Google Sites webpage
-####
+"""Retrieves a single page from a Google Sites webpage
+"""
 
 
 import sys
@@ -37,10 +37,14 @@ def get_page(client, path):
   page_author = 'unknown'
   return page_title, page_path, page_node, page_date, page_author, page_body
 
-args = sys.argv[1:]
-#print args
-password, email, site_name = args.pop(), args.pop(), args.pop()
-client, auth_token = setup_client(site_name, email, password)
-path = '/Urban-Astronomer-Updates/publiclecture-newworldsinsearchofotherearths'
-output = get_page(client, path) 
-print output
+def main():
+  args = sys.argv[1:]
+  #print args
+  password, email, site_name = args.pop(), args.pop(), args.pop()
+  client, auth_token = setup_client(site_name, email, password)
+  path = '/Urban-Astronomer-Updates/publiclecture-newworldsinsearchofotherearths'
+  output = get_page(client, path) 
+  print output
+
+if __name__ == "__main__":
+  main()
