@@ -21,12 +21,10 @@ def getBody(soup):
   Returns: BeautifulSoup object
   """
   content = soup.find('div', class_='entry-content')
-  for tag in soup.table:
-    tag.unwrap()
-  for tag in soup.td:
-    tag.unwrap()
-  for tag in soup.tr:
-    tag.unwrap()
+  #Remove all the bad tags
+  for badTags in ['table', 'tbody', 'tr', 'td', 'script']:
+    for tag in soup(badTags):
+      tag.unwrap()
   return content
 
 def renameImages(soup, images, drupal):
@@ -177,7 +175,6 @@ def createPage(soup, title, date, path):
   testpage['title'] = title 
   keywords = path.split('/')[1:-1]
   print "Keywords:   ", keywords
-  keywords.append("astronomy")
   testpage['keywords'] = keywords
   testalias = '/'.join( path.split('/')[1:] )
   print testalias
@@ -197,7 +194,7 @@ def uploadHTML(proxy, pagedata):
   terms = pagedata['keywords']
   date = dateutil.parser.parse(pagedata['date'])
   print "Terms:  ", terms
-  vocabulary = 'tags'
+  vocabulary = 'Astronomy'
 
   # use the appropriate method
   meth = proxy.bulkpub.newPage
@@ -271,7 +268,7 @@ def main():
   for image in imageList:
     print "image ", image, " uploading...   "
     imageDecoded = urllib.unquote(image).decode()
-  #  imageURLs[imageDecoded] = uploadImage(drupal, imageDecoded, imageList)
+    imageURLs[imageDecoded] = uploadImage(drupal, imageDecoded, imageList)
     print "   ...done"
   articleDict = findAllHTML(dirTree)
 
@@ -284,12 +281,12 @@ def main():
     fullTitle = soup.title.text
     cleanBody = renameImages(getBody(soup), imageURLs, drupal)
     body = rewriteLinks(cleanBody)
-    print body.prettify()
+    #print body.prettify()
     page = createPage(body, fullTitle, date, path)
     
-    #print uploadHTML(drupal, page)
+    print uploadHTML(drupal, page)
     
-    exit()
+    #exit()
     
     
 
