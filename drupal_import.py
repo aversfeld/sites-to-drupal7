@@ -115,7 +115,7 @@ def uploadImage(proxy, imageName, imageList):
   ret=None
   # is the file there?
   if not os.path.exists(image):
-    print("Error!",image,"does not exist")
+    print "Error!",image,"does not exist"
     return ret
   # get the file type
   sp = os.path.splitext(imageName)
@@ -125,7 +125,7 @@ def uploadImage(proxy, imageName, imageList):
   if spext in ftypes:
     ftp = ftypes[spext]
   else:
-    print("Error!",f,spext,"unknown image type")
+    print "Error!",f,spext,"unknown image type" 
     return ret
     
   # start creating the data to send over XMLRPC
@@ -135,7 +135,7 @@ def uploadImage(proxy, imageName, imageList):
   try:
     fd = io.FileIO(image,mode='r+b')
   except:
-    print("Error!",image,"could not be opened")
+    print "Error!",image,"could not be opened" 
     return None
 
   # read in the file
@@ -153,7 +153,7 @@ def uploadImage(proxy, imageName, imageList):
     sendf=True
     
   except:
-    print("newImage failed!")
+    print "newImage failed!" 
     traceback.print_exc()
     sendf =False
   # if the image was not sent, return an error
@@ -177,7 +177,7 @@ def createPage(soup, title, date, path):
   print "Keywords:   ", keywords
   testpage['keywords'] = keywords
   testalias = '/'.join( path.split('/')[1:] )
-  print testalias
+  #print testalias
   testpage['alias'] = testalias
   testpage['format'] = "full_html"
   testpage['content'] = unicode(soup)
@@ -194,7 +194,7 @@ def uploadHTML(proxy, pagedata):
   terms = pagedata['keywords']
   date = dateutil.parser.parse(pagedata['date'])
   print "Terms:  ", terms
-  vocabulary = 'Astronomy'
+  vocabulary = 'tags'
 
   # use the appropriate method
   meth = proxy.bulkpub.newPage
@@ -203,7 +203,7 @@ def uploadHTML(proxy, pagedata):
   # they have to be added to the vocabulary before they
   # are attached to a content instance.
   for term in terms:
-    print("adding term",term,"to",vocabulary)
+    print "adding term",term,"to",vocabulary 
     addVocabularyTerm(proxy, vocabulary, term)
 
   # create the data to send over RPC
