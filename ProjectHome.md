@@ -1,0 +1,1 @@
+This tool should migrate an entire website from Google Sites onto a suitably configured Drupal 7 installation.  Each page is created as a node, with internal links translated appropriately.
